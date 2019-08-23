@@ -1,19 +1,16 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
-# Author:W22
+# Author:W22,张灵灵
 
 import os
 import sys
 
 #用来放exe应用程序的位置
 Applications = [
-    "/home/w22/CTF_Tools/CTF_Tools_3/编码解码/QR_Research/CQR.exe",
-    "/home/w22/CTF_Tools/CTF_Tools_1/编码与密码/密码/PYG密码学综合工具/PYG_TOOLS_VER5.exe",
-    "/home/w22/CTF_Tools/CTF_Tools_1/编码与密码/密码/RSA/RSA大整数分解/yafu-1.34/yafu-Win32.exe",
-    "/home/w22/CTF_Tools/Extended/UPXUnPacKer/UPXUnPacKer.V0.3.By.skylly.exe",
-    "/home/w22/CTF_Tools/CTF_Tools_3/信息隐藏/audacity-win-2.1.0/audacity.exe",
-    "/home/w22/CTF_Tools/CTF_Tools_3/信息隐藏/MP3Stego_1_1_18/MP3Stego/MP3StegoEncode.exe",
-    "/home/w22/CTF_Tools/CTF_Tools_3/信息隐藏/MP3Stego_1_1_18/MP3Stego/MP3StegoDecode.exe"
+    "/home/ling/CTF/编码解码/QR_Research/CQR.exe",
+    "/home/ling/CTF/BurpSuite_pro_v2.1/burpsuite_pro_v2.1_BurpHelper.jar",
+    "/home/ling/CTF/1.py",
+    "/home/ling/CTF/1.hahah"
 ]
 
 
@@ -44,6 +41,9 @@ def OpenPy(Num):
     os.system(cmd)
     return 0;
 
+def file_extension(path): 
+  return os.path.splitext(path)[1] 
+
 if __name__ == "__main__":
     AppName = GetAppName(Applications)
     while True:
@@ -51,9 +51,16 @@ if __name__ == "__main__":
             print(AppName[i])
         try:
             Choose = GetUserChoose()
-            if (Choose <= len(Applications)-1):
-                OpenItem(Choose)
-            else:
-                print('[-]Error!')
+            file_tzm=file_extension(AppName[Choose])
+            if(Choose <= len(Applications)-1):    
+               if(file_tzm=='.exe'): 
+                      OpenItem(Choose)
+               elif(file_tzm=='.jar'):
+                      OpenJar(Choose)
+               elif(file_tzm=='.py'):
+                      OpenPy(Choose)
+               else:
+                    print("----------------------------------\n\n\nUnsupported file types\n\n\n----------------------------------")
+            else:print('[-]Error!')
         except:
             pass
